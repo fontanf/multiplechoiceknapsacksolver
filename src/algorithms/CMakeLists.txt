@@ -1,0 +1,27 @@
+add_library(MultipleChoiceKnapsackSolver_milp)
+target_sources(MultipleChoiceKnapsackSolver_milp PRIVATE
+    milp.cpp)
+target_include_directories(MultipleChoiceKnapsackSolver_milp PUBLIC
+    ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(MultipleChoiceKnapsackSolver_milp PUBLIC
+    MultipleChoiceKnapsackSolver
+    MathOptSolversCMake::milp)
+add_library(MultipleChoiceKnapsackSolver::milp ALIAS MultipleChoiceKnapsackSolver_milp)
+
+add_library(MultipleChoiceKnapsackSolver_dyer_zemel)
+target_sources(MultipleChoiceKnapsackSolver_dyer_zemel PRIVATE
+    dyer_zemel.cpp)
+target_include_directories(MultipleChoiceKnapsackSolver_dyer_zemel PUBLIC
+    ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(MultipleChoiceKnapsackSolver_dyer_zemel PUBLIC
+    MultipleChoiceKnapsackSolver)
+add_library(MultipleChoiceKnapsackSolver::dyer_zemel ALIAS MultipleChoiceKnapsackSolver_dyer_zemel)
+
+add_library(MultipleChoiceKnapsackSolver_dynamic_programming_bellman)
+target_sources(MultipleChoiceKnapsackSolver_dynamic_programming_bellman PRIVATE
+    dynamic_programming_bellman.cpp)
+target_include_directories(MultipleChoiceKnapsackSolver_dynamic_programming_bellman PUBLIC
+    ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(MultipleChoiceKnapsackSolver_dynamic_programming_bellman PUBLIC
+    MultipleChoiceKnapsackSolver)
+add_library(MultipleChoiceKnapsackSolver::dynamic_programming_bellman ALIAS MultipleChoiceKnapsackSolver_dynamic_programming_bellman)
