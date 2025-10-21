@@ -48,7 +48,7 @@ mathoptsolverscmake::MilpModel create_milp_model(
     model.constraints_upper_bounds[constraints_id] = instance.capacity();
     constraints_id++;
 
-    // Constraints:conflict constraints.
+    // Constraints: conflict constraints.
     for (GroupId group_id = 0;
             group_id < instance.number_of_groups();
             ++group_id) {
@@ -103,6 +103,8 @@ MilpOutput multiplechoiceknapsacksolver::milp(
         mathoptsolverscmake::set_time_limit(highs, parameters.timer.remaining_time());
         mathoptsolverscmake::set_log_file(highs, "highs.log");
         mathoptsolverscmake::load(highs, milp_model);
+        highs.setHighsOptionValue("mip_rel_gap", 0.0);
+        highs.setHighsOptionValue("mip_abs_gap", 0.0);
         highs.setCallback([
                 &instance,
                 &parameters,

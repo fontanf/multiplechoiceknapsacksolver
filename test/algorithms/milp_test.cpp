@@ -9,6 +9,10 @@ TEST_P(ExactAlgorithmTest, ExactAlgorithm)
     const Instance instance = get_instance(test_params.files);
     const Solution solution = get_solution(instance, test_params.files);
     auto output = test_params.algorithm(instance);
+    std::cout << std::endl;
+    std::cout << "Refence solution" << std::endl;
+    std::cout << "----------------" << std::endl;
+    solution.format(std::cout, 1);
     EXPECT_EQ(output.value, solution.profit());
     EXPECT_EQ(output.value, output.solution.profit());
     EXPECT_EQ(output.bound, solution.profit());
@@ -16,7 +20,7 @@ TEST_P(ExactAlgorithmTest, ExactAlgorithm)
 
 INSTANTIATE_TEST_SUITE_P(
         MultipleChoiceKnapsackMilp,
-        ExactNoSolutionAlgorithmTest,
+        ExactAlgorithmTest,
         testing::ValuesIn(get_test_params(
                 {
                     [](const Instance& instance)

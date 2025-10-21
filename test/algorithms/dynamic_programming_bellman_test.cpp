@@ -40,7 +40,7 @@ INSTANTIATE_TEST_SUITE_P(
 
 INSTANTIATE_TEST_SUITE_P(
         MultipleChoiceKnapsackDynamicProgrammingBellmanNoSolution,
-        ExactNoSolutionAlgorithmTest,
+        ExactAlgorithmTest,
         testing::ValuesIn(get_test_params(
                 {
                     [](const Instance& instance)

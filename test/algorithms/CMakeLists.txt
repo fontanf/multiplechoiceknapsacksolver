@@ -15,7 +15,8 @@ target_link_libraries(MultipleChoiceKnapsackSolver_dynamic_programming_bellman_t
     MultipleChoiceKnapsackSolver_dynamic_programming_bellman
     GTest::gtest_main)
 gtest_discover_tests(MultipleChoiceKnapsackSolver_dynamic_programming_bellman_test
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    PROPERTIES TIMEOUT 3600)
 
 add_executable(MultipleChoiceKnapsackSolver_milp_test)
 target_sources(MultipleChoiceKnapsackSolver_milp_test PRIVATE
@@ -24,8 +25,9 @@ target_link_libraries(MultipleChoiceKnapsackSolver_milp_test
     MultipleChoiceKnapsackSolver_tests
     MultipleChoiceKnapsackSolver_milp
     GTest::gtest_main)
-add_test(MultipleChoiceKnapsackSolver_milp_test MultipleChoiceKnapsackSolver_milp_test)
-set_tests_properties(MultipleChoiceKnapsackSolver_milp_test PROPERTIES TIMEOUT 10000)
+gtest_discover_tests(MultipleChoiceKnapsackSolver_milp_test
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    PROPERTIES TIMEOUT 3600)
 
 add_executable(MultipleChoiceKnapsackSolver_dyer_zemel_test)
 target_sources(MultipleChoiceKnapsackSolver_dyer_zemel_test PRIVATE
@@ -34,5 +36,6 @@ target_link_libraries(MultipleChoiceKnapsackSolver_dyer_zemel_test
     MultipleChoiceKnapsackSolver_tests
     MultipleChoiceKnapsackSolver_dyer_zemel
     GTest::gtest_main)
-add_test(MultipleChoiceKnapsackSolver_dyer_zemel_test MultipleChoiceKnapsackSolver_dyer_zemel_test)
-set_tests_properties(MultipleChoiceKnapsackSolver_dyer_zemel_test PROPERTIES TIMEOUT 10000)
+gtest_discover_tests(MultipleChoiceKnapsackSolver_dyer_zemel_test
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    PROPERTIES TIMEOUT 3600)

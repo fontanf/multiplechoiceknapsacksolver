@@ -2,7 +2,6 @@ import argparse
 import sys
 import os
 import json
-import pathlib
 import shutil
 
 
@@ -73,9 +72,6 @@ with open(args.output, 'w') as output_file:
                     value = int(json_data["Output"]["Value"])
                     if bound == value:
                         output_file.write(f"{instance_path}\n")
-
-                        # If no solution file already exists, copy it.
-                        if not pathlib.Path(certificate_full_path).is_file():
-                            shutil.copyfile(
-                                    certificate_tmp_path,
-                                    certificate_full_path)
+                        shutil.copyfile(
+                                certificate_tmp_path,
+                                certificate_full_path)

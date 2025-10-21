@@ -47,20 +47,19 @@ Output multiplechoiceknapsacksolver::dynamic_programming_bellman_array(
                 }
             }
         }
-
-        // Update value.
-        if (output.value < values_next[instance.capacity()]) {
-            std::stringstream ss;
-            ss << "it " << group_id;
-            algorithm_formatter.update_value(
-                    values_next[instance.capacity()],
-                    ss.str());
-        }
     }
 
+    // Retrieve best value.
+    Profit value = 0;
+    for (Weight weight = instance.capacity(); weight >= 0; --weight)
+        value = (std::max)(value, values_next[weight]);
+    // Update value.
+    algorithm_formatter.update_value(
+            value,
+            "algorithm end");
     // Update bound.
     algorithm_formatter.update_bound(
-            output.value,
+            value,
             "algorithm end");
 
     algorithm_formatter.end();
@@ -124,24 +123,26 @@ Output multiplechoiceknapsacksolver::dynamic_programming_bellman_array_all(
                 }
             }
         }
+    }
 
-        // Update lower bound
-        if (output.value < values[compute_state_id(instance, group_id, instance.capacity())]) {
-            std::stringstream ss;
-            ss << "it " << group_id;
-            algorithm_formatter.update_value(
-                    values[compute_state_id(instance, group_id, instance.capacity())],
-                    ss.str());
+    // Retrieve best value.
+    Profit value_best = 0;
+    Weight weight_best = 0;
+    for (Weight weight = instance.capacity(); weight >= 0; --weight) {
+        StateId state_id = compute_state_id(instance, instance.number_of_groups() - 1, weight);
+        if (value_best < values[state_id]) {
+            value_best = values[state_id];
+            weight_best = weight;
         }
     }
 
     // Update upper bound
     algorithm_formatter.update_bound(
-            output.value,
+            value_best,
             "algorithm end (bound)");
 
     // Retrieve optimal solution.
-    Weight weight = instance.capacity();
+    Weight weight = weight_best;
     Solution solution(instance);
     for (GroupId group_id = instance.number_of_groups() - 1;
             group_id >= 0;
@@ -152,8 +153,8 @@ Output multiplechoiceknapsacksolver::dynamic_programming_bellman_array_all(
             const Item& item = instance.item(item_id);
             if (weight - item.weight < 0)
                 continue;
-            StateId state_id_prev = compute_state_id(instance, group_id - 1, weight - item.weight);
-            if (values[state_id_prev] + item.profit == values[state_id]) {
+            StateId state_prev_id = compute_state_id(instance, group_id - 1, weight - item.weight);
+            if (values[state_prev_id] + item.profit == values[state_id]) {
                 weight -= item.weight;
                 solution.add(item_id);
                 break;
