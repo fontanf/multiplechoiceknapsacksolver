@@ -30,7 +30,7 @@ jobs:
     #    python3 -u scripts/download_data.py
     - name: Build
       run: |
-        cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DMULTIPLECHOICEKNAPSACKSOLVER_USE_HIGHS=ON
         cmake --build build --config Release --parallel
         cmake --install build --config Release --prefix install
     - name: Run unit tests

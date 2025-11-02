@@ -3,11 +3,11 @@ cmake_minimum_required(VERSION 3.15.0)
 project(MultipleChoiceKnapsackSolver LANGUAGES CXX)
 
 # Solver options.
-option(MULTIPLECHOICEKNAPSACKSOLVER_USE_HIGHS "Use HiGHS" ON)
+option(MULTIPLECHOICEKNAPSACKSOLVER_USE_HIGHS "Use HiGHS" OFF)
 
 # Build options.
 option(MULTIPLECHOICEKNAPSACKSOLVER_BUILD_MAIN "Build main" ON)
-option(MULTIPLECHOICEKNAPSACKSOLVER_BUILD_TEST "Build the unit tests" ON)
+option(MULTIPLECHOICEKNAPSACKSOLVER_BUILD_TEST "Build unit tests" ON)
 
 # Avoid FetchContent warning.
 cmake_policy(SET CMP0135 NEW)
@@ -21,4 +21,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Add sub-directories.
 add_subdirectory(extern)
 add_subdirectory(src)
-add_subdirectory(test)
+if(MULTIPLECHOICEKNAPSACKSOLVER_BUILD_TEST)
+    add_subdirectory(test)
+endif()

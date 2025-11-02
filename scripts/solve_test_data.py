@@ -18,10 +18,6 @@ parser.add_argument(
         "algorithm",
         type=str,
         help='')
-parser.add_argument(
-        "output",
-        type=str,
-        help='')
 
 args = parser.parse_args()
 
@@ -31,7 +27,10 @@ main = os.path.join(
         "bin",
         "multiplechoiceknapsacksolver")
 
-with open(args.output, 'w') as output_file:
+output_path = os.path.join(
+        "data",
+        f"test_{args.algorithm.replace("-", "_")}.txt")
+with open(output_path, 'w') as output_file:
     instance_types = [
             "uncorrelated",
             "weakly-correlated",
