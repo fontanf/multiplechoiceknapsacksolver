@@ -36,7 +36,7 @@ struct MilpOutput: Output
 
 
     /** Number of iterations. */
-    Counter number_of_iterations = 0;
+    //Counter number_of_iterations = 0;
 
 
     virtual int format_width() const override { return 31; }
@@ -45,17 +45,17 @@ struct MilpOutput: Output
     {
         Output::format(os);
         int width = format_width();
-        os
-            << std::setw(width) << std::left << "Number of iterations: " << number_of_iterations << std::endl
-            ;
+        //os
+        //    << std::setw(width) << std::left << "Number of iterations: " << number_of_iterations << std::endl
+        //    ;
     }
 
     virtual nlohmann::json to_json() const override
     {
         nlohmann::json json = Output::to_json();
-        json.merge_patch({
-                {"NumberOfIterations", number_of_iterations},
-                });
+        //json.merge_patch({
+        //        {"NumberOfIterations", number_of_iterations},
+        //        });
         return json;
     }
 };

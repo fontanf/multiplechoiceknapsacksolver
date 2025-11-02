@@ -34,8 +34,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(optimizationtools)
 
 # Fetch fontanf/mathoptsolverscmake.
-set(MATHOPTSOLVERSCMAKE_USE_CLP ${MULTIPLECHOICEKNAPSACKSOLVER_USE_CLP})
-set(MATHOPTSOLVERSCMAKE_USE_HIGHS ${MULTIPLECHOICEKNAPSACKSOLVER_USE_HIGHS})
+if(MULTIPLECHOICEKNAPSACKSOLVER_USE_CLP)
+    set(MATHOPTSOLVERSCMAKE_USE_CLP ON)
+endif()
+if(MULTIPLECHOICEKNAPSACKSOLVER_USE_HIGHS)
+    set(MATHOPTSOLVERSCMAKE_USE_HIGHS ON)
+endif()
 FetchContent_Declare(
     mathoptsolverscmake
     GIT_REPOSITORY https://github.com/fontanf/mathoptsolverscmake.git
